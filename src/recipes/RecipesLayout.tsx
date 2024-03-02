@@ -1,7 +1,7 @@
 import { useOutlet } from "react-router-dom";
 import RecipeList from "./RecipeList";
 import "./RecipesLayout.css";
-//import { useAuth } from "../security/_Authprovider";
+import { useAuth } from "../security/_Authprovider";
 
 export default function RecipesLayout() {
   const outlet = useOutlet();
@@ -13,7 +13,7 @@ export default function RecipesLayout() {
       </div>
       <div className="outlet-container">
         {outlet || <h3>Select a recipe to see details</h3>}
-        {/* <Outlet /> */}
+        <Outlet />
       </div>
     </div>
   );

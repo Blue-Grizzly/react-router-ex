@@ -1,19 +1,19 @@
 import { useState } from "react";
-//import { useLocation } from "react-router-dom";
-//import { useAuth } from "./_Authprovider";
 import { User } from "../services/authFacade";
 import "./login.css";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "./AuthProvider";
 
 const Login = () => {
   const [user, setUser] = useState({ username: "", password: "" });
 
-  //const navigate = useNavigate();
-  //const location = useLocation();
-  //const auth = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const auth = useAuth();
 
   const [err, setErr] = useState(null);
 
-  //const from = location.state?.from?.pathname || "/";
+  const from = location.state?.from?.pathname || "/";
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -24,15 +24,15 @@ const Login = () => {
     setErr(null);
     console.log(err);
     alert("Login: " + JSON.stringify(user));
-    return;
-    // auth
-    //   .signIn(user)
-    //   .then(() => {
-    //     navigate(from, { replace: true });
-    //   })
-    //   .catch((err) => {
-    //     setErr(err);
-    //   });
+    return (
+    auth
+      .signIn(user)
+      .then(() => {
+        navigate(from, { replace: true });
+      })
+      .catch((err) => {
+        setErr(err);
+      }));
   }
 
   return (

@@ -4,5 +4,5 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: "https://blue-grizzly.github.io/react-router-ex"
+  //base: "https://blue-grizzly.github.io/react-router-ex"
 })

@@ -39,8 +39,9 @@ export default function RecipeForm() {
     }
   };
 
-  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log("test")
     const newRecipe = await addRecipe(formData);
     alert("New recipe added")
     console.info("New/Edited Recipe", newRecipe);
@@ -49,7 +50,7 @@ export default function RecipeForm() {
   return (
     <>
       <h2>Recipes Add/Edit/Delete</h2>
-      <form id="recipeForm" onSubmit={()=>handleSubmit}>
+      <form id="recipeForm" onSubmit={(e)=>handleSubmit(e)}>
         <div className="form-group">
           <label htmlFor="id">ID:</label>
           <input type="text" id="name" name="name" disabled value={formData.id || ""} />
@@ -132,7 +133,6 @@ export default function RecipeForm() {
           <label htmlFor="source">Source:</label>
           <input type="text" id="source" name="source" required />
         </div>
-      </form>
       <button type="submit" className="recipe-form-btn">
         Submit
       </button>
@@ -141,9 +141,10 @@ export default function RecipeForm() {
         onClick={() => {
           setFormData({ ...EMPTY_RECIPE });
         }}
-      >
+        >
         Cancel
       </button>
+        </form>
       {formData.id && (
         <>
           <button className="recipe-form-btn" onClick={handleDelete}>

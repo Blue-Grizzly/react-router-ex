@@ -1,10 +1,4 @@
-/**
- * Utility Method to create options for a fetch call
- * @param method GET, POST, PUT, DELETE
- * @param body  The request body (only relevant for POST and PUT)
- * @returns 
- */
-export function makeOptions(method: string, body: object | null): RequestInit {
+export function makeOptions(method: string, body: object | null, addToken?:boolean): RequestInit {
   const opts: RequestInit = {
     method: method,
     headers: {
@@ -14,6 +8,10 @@ export function makeOptions(method: string, body: object | null): RequestInit {
   };
   if (body) {
     opts.body = JSON.stringify(body);
+  }
+  if (addToken) {
+    const token = localStorage.getItem("token")
+    opts.headers["Authorization"] = "Bearer " + token
   }
   return opts;
 }
